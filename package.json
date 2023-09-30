@@ -23,6 +23,7 @@
     "devDependencies": {
         "@types/cors": "^2.8.14",
         "@types/express": "^4.17.18",
+        "@types/mongoose": "^5.11.97",
         "@types/node": "^20.7.2",
         "concurrently": "^8.2.1",
         "tsx": "^3.13.0",
