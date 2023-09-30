@@ -1,6 +1,5 @@
 import express, { Request, Response, Application } from 'express'
-import dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
 
 const app: Application = express()
 const PORT = process.env.PORT || 5000
