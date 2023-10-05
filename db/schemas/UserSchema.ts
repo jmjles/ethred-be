@@ -9,4 +9,6 @@ export const userSchema = new mongoose.Schema({
     active: { type: Boolean, default: true },
     banned: { type: Boolean, default: false },
     joined: Date,
+    lastOnline: Date,
+    ipAddresses: [String],
 })
