@@ -14,7 +14,7 @@ export const userSchema = new mongoose.Schema({
     border: String,
     active: { type: Boolean, default: true },
     banned: { type: Boolean, default: false },
-    joined: Date,
+    joined: { type: Date, default: Date.now() },
     lastOnline: Date,
     ipAddresses: [String],
     followers: [user],

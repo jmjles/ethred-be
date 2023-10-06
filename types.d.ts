@@ -9,13 +9,10 @@ interface ServerContext {
     }
 }
 
-interface User {
+type NewUser = {
     cryptoAddress: string
     id: string
     displayName: string
     avatar?: string
     border?: string
-    active: Boolean
-    banned: Boolean
-    joined: Date
 }

@@ -2,7 +2,11 @@ export const schema = `#graphql
 type Query {
     getUserById(id: String): User
     getAllUsers:[User]
-    getThreadsByUser(id: String):[Thread]
+    #getThreadsByUser(id: String):[Thread]
+}
+
+type Mutation {
+    addUser(user:NewUser):User
 }
 
 type UserSince {
@@ -24,6 +28,14 @@ type User {
     followers: [UserSince],
     following: [UserSince],
     blocked: [UserSince],
+}
+
+input NewUser {
+    cryptoAddress: String
+    id: String
+    displayName: String
+    avatar: String
+    border: String
 }
 
 type Thread {
