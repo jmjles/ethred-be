@@ -1,11 +1,12 @@
 import mongoose from 'mongoose'
 
-export const ThreadSchema = new mongoose.Schema({
-    op: { type: String, required: true },
+export const threadSchema = new mongoose.Schema({
+    user: { type: String, required: true },
     content: { type: String, required: true },
     replyTo: String,
     media: [String],
-    deleted: Boolean,
+    deleted: { type: Boolean, default: false },
     parent: Boolean,
     date: Date,
+    edited: { type: Boolean, default: false },
 })
