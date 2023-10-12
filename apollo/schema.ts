@@ -6,7 +6,7 @@ type Query {
 }
 
 type Mutation {
-    addUser(user:NewUser):User
+    addUser(newUser:NewUser):User
 }
 
 type UserSince {

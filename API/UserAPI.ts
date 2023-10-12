@@ -9,7 +9,7 @@ export class UserAPI extends RESTDataSource {
     async getAllUsers() {
         return await getAllUsers()
     }
-    async addUser(user: NewUser) {
-        return await addUser(user)
+    async addUser(newUser: NewUser) {
+        return await addUser(newUser)
     }
 }

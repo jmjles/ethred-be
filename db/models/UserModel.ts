@@ -1,4 +1,4 @@
-import { Mongoose } from 'mongoose'
+import mongoose from 'mongoose'
 import { userSchema } from '../schemas/UserSchema'
 
-export const userModel = new Mongoose().model('Users', userSchema)
+export const userModel = mongoose.model('Users', userSchema)

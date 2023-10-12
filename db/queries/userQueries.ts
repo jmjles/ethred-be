@@ -3,27 +3,27 @@ import { userModel as model } from '../models/UserModel'
 
 export const getUserById = async (id: string) => {
     try {
-        const user = await model.findOne({ id })
-        return user
+        return await model.findOne({ id })
     } catch (er: any) {
+        console.log(er)
         return {}
     }
 }
 
 export const getAllUsers = async () => {
     try {
-        const users = await model.where()
-        return users
+        return await model.find()
     } catch (er: any) {
-        return {}
+        console.log(er)
+        return []
     }
 }
 
 export const addUser = async (newUser: NewUser) => {
     try {
-        const user = await model.create(newUser)
-        return user
+        return await model.create(newUser)
     } catch (er: any) {
+        console.log(er)
         return {}
     }
 }
