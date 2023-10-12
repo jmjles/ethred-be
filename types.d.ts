@@ -16,3 +16,20 @@ type NewUser = {
     avatar?: string
     border?: string
 }
+
+interface NewThread {
+    user: string
+    content: string
+    media?: string[]
+    date: Date
+}
+
+interface Reply extends NewThread {
+    replyTo: string
+}
+
+interface Thread extends Reply {
+    edited: Boolean
+    deleted: Boolean
+    parent: Boolean
+}
