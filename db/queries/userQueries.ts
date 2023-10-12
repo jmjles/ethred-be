@@ -12,7 +12,7 @@ export const getUserById = async (id: string) => {
 
 export const getAllUsers = async () => {
     try {
-        return await model.find()
+        return await model.where()
     } catch (er: any) {
         console.log(er)
         return []
