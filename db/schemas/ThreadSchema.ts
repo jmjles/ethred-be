@@ -9,4 +9,8 @@ export const threadSchema = new mongoose.Schema({
     parent: Boolean,
     date: Date,
     edited: { type: Boolean, default: false },
+    shares: { type: Number, default: 0 },
+    views: { type: Number, default: 0 },
+    upVotes: { type: [String], default: [], unique: true },
+    downVotes: { type: [String], default: [], unique: true },
 })
