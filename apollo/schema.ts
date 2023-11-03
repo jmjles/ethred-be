@@ -2,15 +2,31 @@ export const schema = `#graphql
 type Query {
     getUserById(id: String): User
     getAllUsers:[User]
-    #getThreadsByUser(id: String):[Thread]
+    getUsers:[User]
+    getSuggestedUsers(friends:[String],blocked:[String]):[User]
+
+    getThreadById(id:String):Thread
+    getThreadsByUser(id:String):[Thread]
+    getThreads(popularity:String,time:String):[Thread]
+    getFollowingThreads(followers:[String]):[Thread]
+    discoverThreads():[Thread]
 }
 
 type Mutation {
     addUser(newUser:NewUser):User
+    editUser(id:String,user:Any):User
+    banUser(id:String):User
+    deleteUser(id:String):User
+    permaDeleteUser(id:String):User 
+
+    newThread():Thread
+    editThread():Thread
+    deleteThreadById(id:String):Thread
+    deleteThreadsByUser(id:String):Boolean
 }
 
 type UserSince {
-    id: String,
+    id: String, 
     displayName: String,
     since: String,
 }
