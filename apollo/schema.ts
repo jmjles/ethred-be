@@ -16,6 +16,7 @@ type Mutation {
     addUser(newUser:NewUser):User
     editUser(id:String,user:Any):User
     banUser(id:String):User
+    unBanUser(id:String):User
     deleteUser(id:String):User
     permaDeleteUser(id:String):User 
 
