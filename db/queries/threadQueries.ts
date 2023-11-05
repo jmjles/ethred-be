@@ -21,32 +21,44 @@ export const getThreadById = async (id: string) => {
     }
 }
 
-export const getThreadsByUser = async (user: string) => {
+export const getThreadsByUser = async (id: string) => {
     try {
-        return await model.where({ id: user })
+        return await model.where({ id })
     } catch (er) {
         console.log(er)
         return []
     }
 }
 
-interface ThreadParams {
-    popularity: 'all' | 'upVotes' | 'downVotes' | 'views'
+export const getThreads = async (
+    popularity: 'all' | 'upVotes' | 'downVotes' | 'views',
     time: 'allTime' | 'last24' | 'week' | 'month'
-}
-
-export const getThreads = async (args: ThreadParams) => {
+) => {
     try {
-        const time = ''
-        return await model.where().gte('date', time).sort(args.popularity)
+        const t =
+            time === 'last24'
+                ? ''
+                : time === 'week'
+                ? ''
+                : time === 'month'
+                ? ''
+                : time === 'allTime'
+                ? ''
+                : null
+        if (t === null) throw Error('bad time input')
+        if (!['all', 'upVotes', 'downVotes', 'views'].includes(popularity))
+            throw Error('bad popularity input')
+        return await model.where().gte('date', t).sort(popularity)
     } catch (er) {
         console.log(er)
         return []
     }
 }
 
-export const getFollowingThreads = async () => {
+export const getFollowingThreads = async (following: string[]) => {
     try {
+        if (!following.length) return []
+        return await model.find().all('id', following)
     } catch (er) {
         console.log(er)
         return []

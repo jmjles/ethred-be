@@ -66,33 +66,56 @@ export const getSuggestedUsers = async (
 }
 
 //* Update
-export const editUser = async (id:string,user:any) => {
+export const editUser = async (id: string, user: any) => {
     try {
     } catch (er) {
         console.log(er)
         return []
     }
 }
-export const banUser = async (id:string) => {
+export const banUser = async (id: string) => {
     try {
+        return await model.findByIdAndUpdate(
+            id,
+            { banned: true },
+            { new: true }
+        )
     } catch (er) {
         console.log(er)
-        return []
+        return {}
+    }
+}
+export const unBanUser = async (id: string) => {
+    try {
+        return await model.findByIdAndUpdate(
+            id,
+            { banned: false },
+            { new: true }
+        )
+    } catch (er) {
+        console.log(er)
+        return {}
     }
 }
 
 //* Delete
-export const deleteUser = async (id:string) => {
+export const deleteUser = async (id: string) => {
     try {
+        return await model.findByIdAndUpdate(
+            id,
+            { deleted: true },
+            { new: true }
+        )
     } catch (er) {
         console.log(er)
-        return []
+        return {}
     }
 }
-export const permaDeleteUser = async (id:string) => {
+export const permaDeleteUser = async (id: string) => {
     try {
+        return await model.findByIdAndDelete(id, { new: true })
     } catch (er) {
         console.log(er)
-        return []
+        return {}
     }
 }
