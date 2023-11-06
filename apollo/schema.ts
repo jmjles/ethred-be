@@ -2,7 +2,7 @@ export const schema = `#graphql
 type Query {
     getUserById(id: String): User
     getAllUsers:[User]
-    getUsers:[User]
+    getUsers(users:[String]):[User]
     getSuggestedUsers(friends:[String],blocked:[String]):[User]
 
     getThreadById(id:String):Thread

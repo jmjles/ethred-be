@@ -1,5 +1,15 @@
 import { RESTDataSource } from '@apollo/datasource-rest'
-import { getAllUsers, getUserById, addUser } from '../db/queries/userQueries'
+import {
+    getAllUsers,
+    getUserById,
+    addUser,
+    getSuggestedUsers,
+    getUsers,
+    banUser,
+    unBanUser,
+    deleteUser,
+    permaDeleteUser,
+} from '../db/queries/userQueries'
 import { NewUser } from '../types'
 
 export class UserAPI extends RESTDataSource {
@@ -9,7 +19,31 @@ export class UserAPI extends RESTDataSource {
     async getAllUsers() {
         return await getAllUsers()
     }
+    async getUsers(users: string[]) {
+        return await getUsers(users)
+    }
+    async getSuggestedUsers(friends: string[], blocked: string[]) {
+        return await getSuggestedUsers(friends, blocked)
+    }
+
     async addUser(newUser: NewUser) {
         return await addUser(newUser)
+    }
+    async editUser() {}
+
+    async banUser(id: string) {
+        return await banUser(id)
+    }
+
+    async unBanUser(id: string) {
+        return await unBanUser(id)
+    }
+
+    async deleteUser(id: string) {
+        return await deleteUser(id)
+    }
+    
+    async permaDeleteUser(id: string) {
+        return await permaDeleteUser(id)
     }
 }
