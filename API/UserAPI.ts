@@ -9,8 +9,9 @@ import {
     unBanUser,
     deleteUser,
     permaDeleteUser,
+    editUser,
 } from '../db/queries/userQueries'
-import { NewUser } from '../types'
+import { EditUser, NewUser } from '../types'
 
 export class UserAPI extends RESTDataSource {
     async getUserById(id: string) {
@@ -29,7 +30,9 @@ export class UserAPI extends RESTDataSource {
     async addUser(newUser: NewUser) {
         return await addUser(newUser)
     }
-    async editUser() {}
+    async editUser(id: string, fields: EditUser) {
+        return await editUser(id, fields)
+    }
 
     async banUser(id: string) {
         return await banUser(id)
@@ -42,7 +45,7 @@ export class UserAPI extends RESTDataSource {
     async deleteUser(id: string) {
         return await deleteUser(id)
     }
-    
+
     async permaDeleteUser(id: string) {
         return await permaDeleteUser(id)
     }

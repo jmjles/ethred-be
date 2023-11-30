@@ -1,5 +1,5 @@
 import { UserAPI } from '../../API/UserAPI'
-import { NewUser } from '../../types'
+import { EditUser, NewUser } from '../../types'
 
 export const userResolvers = {
     Query: {
@@ -52,6 +52,17 @@ export const userResolvers = {
         ) => {
             try {
                 return await user.addUser(newUser)
+            } catch (er) {
+                console.log(er)
+            }
+        },
+        editUser: async (
+            _: any,
+            { id, fields }: { id: string; fields: EditUser },
+            { user }: { user: UserAPI }
+        ) => {
+            try {
+                return await user.editUser(id, fields)
             } catch (er) {
                 console.log(er)
             }

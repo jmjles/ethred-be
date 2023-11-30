@@ -17,6 +17,15 @@ type NewUser = {
     border?: string
 }
 
+type EditUser = {
+    displayName?: string
+    avatar?: string,
+    border?: string,
+    followers?: [string],
+    following?: [user],
+    blocked?: [user],
+}
+
 interface NewThread {
     user: string
     content: string

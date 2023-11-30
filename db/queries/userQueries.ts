@@ -1,4 +1,4 @@
-import { NewUser } from '../../types'
+import { EditUser, NewUser } from '../../types'
 import { userModel as model } from '../models/UserModel'
 
 //* Create
@@ -66,11 +66,12 @@ export const getSuggestedUsers = async (
 }
 
 //* Update
-export const editUser = async (id: string, user: any) => {
+export const editUser = async (id: string, user: EditUser) => {
     try {
+        return await model.findByIdAndUpdate(id, user, { new: true })
     } catch (er) {
         console.log(er)
-        return []
+        return {}
     }
 }
 export const banUser = async (id: string) => {
