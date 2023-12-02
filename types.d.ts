@@ -42,3 +42,10 @@ interface Thread extends Reply {
     deleted: Boolean
     parent: Boolean
 }
+interface EditThread {
+    content: string
+    media?: string[]
+    deleted: Boolean
+}
+ type ThreadPop = 'all' | 'upVotes' | 'downVotes' | 'views'
+ type ThreadTime = 'allTime' | 'last24' | 'week' | 'month'

@@ -1,35 +1,35 @@
 export const schema = `#graphql
 type Query {
-    getUserById(id: String): User
-    getAllUsers:[User]
-    getUsers(users:[String]):[User]
-    getSuggestedUsers(friends:[String],blocked:[String]):[User]
+    getUserById(id: String!): User
+    getAllUsers: [User]
+    getUsers(users: [String]!): [User]
+    getSuggestedUsers(friends: [String]!, blocked: [String]!): [User]
 
-    getThreadById(id:String):Thread
-    getThreadsByUser(id:String):[Thread]
-    getThreads(popularity:String,time:String):[Thread]
-    getFollowingThreads(followers:[String]):[Thread]
-    discoverThreads():[Thread]
+    getThreadById(id: String!): Thread
+    getThreadsByUser(id: String!): [Thread]
+    getThreads(popularity: String!, time: String!): [Thread]
+    getFollowingThreads(followers: [String]!): [Thread]
+    discoverThreads: [Thread]
 }
 
 type Mutation {
-    addUser(newUser:NewUser):User
-    editUser(id:String,user:Any):User
-    banUser(id:String):User
-    unBanUser(id:String):User
-    deleteUser(id:String):User
-    permaDeleteUser(id:String):User 
+    addUser(newUser: NewUser!): User
+    editUser(id: String!, user: EditUser!): User
+    banUser(id: String!): User
+    unBanUser(id: String!): User
+    deleteUser(id: String!): User
+    permaDeleteUser(id: String!): User
 
-    newThread():Thread
-    editThread():Thread
-    deleteThreadById(id:String):Thread
-    deleteThreadsByUser(id:String):Boolean
+    newThread(thread: NewThread!): Thread
+    editThread(id: String!, thread: EditThread!): Thread
+    deleteThreadById(id: String!): Thread
+    deleteThreadsByUser(id: String!): Boolean
 }
 
 type UserSince {
-    id: String, 
-    displayName: String,
-    since: String,
+    id: String
+    displayName: String
+    since: String
 }
 
 type User {
@@ -40,11 +40,11 @@ type User {
     active: Boolean
     banned: Boolean
     joined: String
-    lastOnline: String,
-    ipAddresses: [String],
-    followers: [UserSince],
-    following: [UserSince],
-    blocked: [UserSince],
+    lastOnline: String
+    ipAddresses: [String]
+    followers: [UserSince]
+    following: [UserSince]
+    blocked: [UserSince]
 }
 
 input NewUser {
@@ -55,14 +55,41 @@ input NewUser {
     border: String
 }
 
-type Thread {
-    user:String,
-    content:String,
-    replyTo: String,
-    media: [String],
-    deleted: Boolean,
-    parent: Boolean,
-    date: String,
-    edited:Boolean,
+input EditUser {
+    displayName: String
+    avatar: String
+    border: String
+    followers: [String]
+    following: [UserInfo]
+    blocked: [UserInfo]
 }
+input UserInfo {
+    id:String!
+    displayName:String!
+    since:String!
+}
+type Thread {
+    user: String
+    content: String
+    replyTo: String
+    media: [String]
+    deleted: Boolean
+    parent: Boolean
+    date: String
+    edited: Boolean
+}
+
+input NewThread {
+    user: String
+    content: String
+    media: [String]
+    date: String
+}
+
+input EditThread {
+    content: String
+    media: [String]
+    deleted: Boolean
+}
+
 `

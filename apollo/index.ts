@@ -16,30 +16,35 @@ export default async () => {
     const app = express()
     const httpServer = http.createServer(app)
     //* Create Apollo Server
-    const server = new ApolloServer<ServerContext>({
-        typeDefs: schema,
-        resolvers,
-        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    })
-    //* Launch Server
-    await server.start()
-
-    app.use(
-        '/graphql',
-        cors<cors.CorsRequest>(),
-        json(),
-        expressMiddleware(server, {
-            context: async () => ({
-                user: new UserAPI(),
-                thread: new ThreadAPI(),
-            }),
+    try {
+        const server = new ApolloServer<ServerContext>({
+            typeDefs: schema,
+            resolvers,
+            plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
         })
-    )
+        //* Launch Server
+        await server.start()
 
-    //* Start on port 4000
-    await new Promise<void>((resolve) =>
-        httpServer.listen({ port: 4000 }, resolve)
-    )
+        app.use(
+            '/graphql',
+            cors<cors.CorsRequest>(),
+            json(),
+            expressMiddleware(server, {
+                context: async () => ({
+                    user: new UserAPI(),
+                    thread: new ThreadAPI(),
+                }),
+            })
+        )
 
-    console.log(`🚀 Server ready at http://localhost:4000/`)
+        //* Start on port 4000
+        await new Promise<void>((resolve) =>
+            httpServer.listen({ port: 4000 }, resolve)
+        )
+
+        console.log(`🚀 Server ready at http://localhost:4000/`)
+    } catch (er) {
+        console.log('An Error has occurred')
+        console.log(er)
+    }
 }

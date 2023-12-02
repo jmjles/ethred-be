@@ -1,4 +1,9 @@
-import { NewThread } from '../../types'
+import {
+    EditThread,
+    NewThread,
+    ThreadPop,
+    ThreadTime,
+} from '../../types'
 import { threadModel as model } from '../models/ThreadModel'
 
 //* Create
@@ -30,10 +35,7 @@ export const getThreadsByUser = async (id: string) => {
     }
 }
 
-export const getThreads = async (
-    popularity: 'all' | 'upVotes' | 'downVotes' | 'views',
-    time: 'allTime' | 'last24' | 'week' | 'month'
-) => {
+export const getThreads = async (popularity: ThreadPop, time: ThreadTime) => {
     try {
         const t =
             time === 'last24'
@@ -74,11 +76,12 @@ export const discoverThreads = async () => {
 }
 
 //* Update
-export const editThread = async () => {
+export const editThread = async (id: string, thread: EditThread) => {
     try {
+        return await model.findByIdAndUpdate(id, { ...thread, edited: true },{new:true})
     } catch (er) {
         console.log(er)
-        return []
+        return {}
     }
 }
 
