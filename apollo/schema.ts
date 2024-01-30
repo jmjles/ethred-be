@@ -20,7 +20,7 @@ type Mutation {
     deleteUser(id: String!): User
     permaDeleteUser(id: String!): User
 
-    newThread(thread: NewThread!): Thread
+    newThread(newThread: NewThread!): Thread
     editThread(id: String!, thread: EditThread!): Thread
     deleteThreadById(id: String!): Thread
     deleteThreadsByUser(id: String!): Boolean
@@ -70,18 +70,29 @@ input UserInfo {
 }
 type Thread {
     user: String
+    title: String
     content: String
+    community: String
+    categories: [String]
     replyTo: String
     media: [String]
     deleted: Boolean
     parent: Boolean
     date: String
     edited: Boolean
+    shares: Int
+    views: Int
+    upVotes: [String]
+    downVotes: [String]
 }
 
 input NewThread {
     user: String
     content: String
+    avatar: String
+    community: String
+    categories: [String]
+    title: String
     media: [String]
     date: String
 }

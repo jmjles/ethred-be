@@ -19,16 +19,20 @@ type NewUser = {
 
 type EditUser = {
     displayName?: string
-    avatar?: string,
-    border?: string,
-    followers?: [string],
-    following?: [user],
-    blocked?: [user],
+    avatar?: string
+    border?: string
+    followers?: [string]
+    following?: [user]
+    blocked?: [user]
 }
 
 interface NewThread {
     user: string
+    avatar?: string
     content: string
+    title?: string
+    community?: string
+    categories?: string[]
     media?: string[]
     date: Date
 }
@@ -44,8 +48,12 @@ interface Thread extends Reply {
 }
 interface EditThread {
     content: string
+    avatar?: string
+    title: string
+    community: string
     media?: string[]
-    deleted: Boolean
+    deleted?: Boolean
 }
- type ThreadPop = 'all' | 'upVotes' | 'downVotes' | 'views'
- type ThreadTime = 'allTime' | 'last24' | 'week' | 'month'
+
+type ThreadPop = 'all' | 'upVotes' | 'downVotes' | 'views'
+type ThreadTime = 'allTime' | 'last24' | 'week' | 'month'

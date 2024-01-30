@@ -1,11 +1,6 @@
-import {
-    EditThread,
-    NewThread,
-    ThreadPop,
-    ThreadTime,
-} from '../../types'
+import { EditThread, NewThread, ThreadPop, ThreadTime } from '../../types'
 import { threadModel as model } from '../models/ThreadModel'
-
+import { DateTime } from 'luxon'
 //* Create
 export const newThread = async (thread: NewThread) => {
     try {
@@ -37,20 +32,19 @@ export const getThreadsByUser = async (id: string) => {
 
 export const getThreads = async (popularity: ThreadPop, time: ThreadTime) => {
     try {
+        const d = DateTime.local()
         const t =
             time === 'last24'
-                ? ''
+                ? d.minus({ hours: 24 })
                 : time === 'week'
-                ? ''
+                ? d.minus({ days: 7 })
                 : time === 'month'
-                ? ''
+                ? d.minus({ months: 1 })
                 : time === 'allTime'
-                ? ''
+                ? d.minus({ years: 1000 })
                 : null
-        if (t === null) throw Error('bad time input')
-        if (!['all', 'upVotes', 'downVotes', 'views'].includes(popularity))
-            throw Error('bad popularity input')
-        return await model.where().gte('date', t).sort(popularity)
+        console.log(await model.find({ date: { $gte: t?.toJSDate() } }))
+        return await model.where().gte('date', t?.toJSDate()).sort(popularity)
     } catch (er) {
         console.log(er)
         return []
@@ -78,7 +72,11 @@ export const discoverThreads = async () => {
 //* Update
 export const editThread = async (id: string, thread: EditThread) => {
     try {
-        return await model.findByIdAndUpdate(id, { ...thread, edited: true },{new:true})
+        return await model.findByIdAndUpdate(
+            id,
+            { ...thread, edited: true },
+            { new: true }
+        )
     } catch (er) {
         console.log(er)
         return {}
