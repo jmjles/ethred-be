@@ -43,7 +43,6 @@ export const getThreads = async (popularity: ThreadPop, time: ThreadTime) => {
                 : time === 'allTime'
                 ? d.minus({ years: 1000 })
                 : null
-        console.log(await model.find({ date: { $gte: t?.toJSDate() } }))
         return await model.where().gte('date', t?.toJSDate()).sort(popularity)
     } catch (er) {
         console.log(er)
