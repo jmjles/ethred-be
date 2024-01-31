@@ -1,7 +1,9 @@
-import { ApolloServer } from 'apollo-server-express'
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
+import { ApolloServer } from '@apollo/server'
+import { expressMiddleware } from '@apollo/server/express4'
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import express from 'express'
 import http from 'http'
+import cors from 'cors'
 import pkg from 'body-parser'
 import { resolvers } from './resolvers'
 import { UserAPI } from '../API/UserAPI'
@@ -18,17 +20,27 @@ export default async () => {
             typeDefs: schema,
             resolvers,
             plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-            dataSources: () => {
-                return {
-                    user: new UserAPI(),
-                    thread: new ThreadAPI(),
-                }
-            },
         })
         //* Launch Server
         await server.start()
 
-        server.applyMiddleware({ app })
+        app.use(
+            '/graphql',
+            cors<cors.CorsRequest>({
+                origin: [
+                    'http://localhost:8081',
+                    'https://ethread.jesusmj.com',
+                ],
+            }),
+            json(),
+            expressMiddleware(server, {
+                context: async () => ({
+                    user: new UserAPI(),
+                    thread: new ThreadAPI(),
+                }),
+            })
+        )
+
         //* Start on port 4000
         await new Promise<void>((resolve) =>
             httpServer.listen({ port: 4000 }, resolve)
