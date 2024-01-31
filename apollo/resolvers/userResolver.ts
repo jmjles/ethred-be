@@ -1,5 +1,5 @@
 import { UserAPI } from '../../API/UserAPI'
-import { EditUser, NewUser } from '../../types'
+import type { EditUser, NewUser } from '../../types.d.ts'
 
 export const userResolvers = {
     Query: {

@@ -1,5 +1,10 @@
 import { ThreadAPI } from '../../API/ThreadAPI'
-import { EditThread, NewThread, ThreadPop, ThreadTime } from '../../types'
+import type {
+    EditThread,
+    NewThread,
+    ThreadPop,
+    ThreadTime,
+} from '../../types.d.ts'
 
 export const threadResolvers = {
     Query: {

@@ -10,7 +10,12 @@ import {
     getThreadsByUser,
     newThread,
 } from '../db/queries/threadQueries'
-import { EditThread, NewThread, ThreadPop, ThreadTime } from '../types'
+import type {
+    EditThread,
+    NewThread,
+    ThreadPop,
+    ThreadTime,
+} from '../types.d.ts'
 
 export class ThreadAPI extends RESTDataSource {
     async newThread(thread: NewThread) {

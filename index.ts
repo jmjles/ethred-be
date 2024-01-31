@@ -1,5 +1,5 @@
 import 'graphql-import-node'
-import db from './db'
-import apollo from './apollo'
+import db from './db/index'
+import apollo from './apollo/index'
 db()
 apollo()

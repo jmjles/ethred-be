@@ -11,7 +11,7 @@ import {
     permaDeleteUser,
     editUser,
 } from '../db/queries/userQueries'
-import { EditUser, NewUser } from '../types'
+import type { EditUser, NewUser } from '../types.d.ts'
 
 export class UserAPI extends RESTDataSource {
     async getUserById(id: string) {

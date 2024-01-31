@@ -1,6 +1,6 @@
 import { threadResolvers } from './threadResolver'
 import { userResolvers } from './userResolver'
-import { mergeObj } from '../../utils'
+import { mergeObj } from '../../utils/index'
 
 const resolverList = [threadResolvers, userResolvers]
 const queriesList = resolverList.map((r) => r.Query)

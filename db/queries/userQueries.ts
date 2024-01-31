@@ -1,4 +1,4 @@
-import { EditUser, NewUser } from '../../types'
+import type { EditUser, NewUser } from '../../types.d.ts'
 import { userModel as model } from '../models/UserModel'
 
 //* Create
